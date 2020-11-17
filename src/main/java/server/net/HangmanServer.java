@@ -4,6 +4,7 @@ import server.controller.Controller;
 
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.nio.channels.Selector;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
@@ -11,7 +12,9 @@ import java.util.List;
 public class HangmanServer {
     //private Controller controller;
     //Do I need this list?
+
     private List<ClientHandler> clients = new ArrayList<ClientHandler>();
+    private Selector selector;
     private int listeningPort = 8080;
 
 

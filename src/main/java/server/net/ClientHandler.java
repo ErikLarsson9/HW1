@@ -71,7 +71,8 @@ public class ClientHandler implements Runnable {
 
     }
     private String gameStateMessage(GameState gameState){
-        return gameState.getGuessState() + " " + gameState.getNumberOfGuesses() + " " + gameState.getScore();
+        System.err.println(gameState.getGuessState() + " " + gameState.getNumberOfGuesses() + " " + gameState.getScore()+ " " + gameState.getGameStatus());
+        return gameState.getGuessState() + " " + gameState.getNumberOfGuesses() + " " + gameState.getScore()+ " " + gameState.getGameStatus();
     }
     private void disconnect(){
         try{

@@ -52,7 +52,8 @@ public class CommandLineInterface implements Runnable {
                                         }
                                         else{
                                             String[] gameState = s.split(" ");
-                                            if(gameState[1].equals("-1")){
+                                            //if(gameState[1].equals("-1")){
+                                            if(gameState[3].equals("true") && !(gameState[1].equals("0")) ){
                                                 commandLineIntegration.safePrintln("Word: "+ gameState[0] + " Score: "+ gameState[2]);
                                             }
                                             else{

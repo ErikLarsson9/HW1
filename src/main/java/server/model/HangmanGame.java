@@ -8,13 +8,15 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 
 public class HangmanGame {
-    private static final int numberOfWords = 51477;
+    //private static final int numberOfWords = 51477;
+    private static final int numberOfWords = 1;
     private static final Path pathTofile = Paths.get(URI.create("file:///Users/Likecoke/Desktop/networkProgramming/homework1/HW1/src/main/resources/words.txt"));
     private String word;
     private char[] guessState;
     private int score;
     private int guessesLeft;
     private int wordLength;
+    private boolean gameover;
 
     //private numberOfguessesLeft
     public HangmanGame(){
@@ -25,12 +27,13 @@ public class HangmanGame {
         this.word = chooseWordFromFile();
         this.wordLength = this.word.length();
         this.guessesLeft = this.wordLength;
+        this.gameover = false;
         initializeGuessState(this.wordLength);
         return getGameState();
 
     }
     public GameState getGameState(){
-        return new GameState(this.guessesLeft, this.score, new String(this.guessState));
+        return new GameState(this.guessesLeft, this.score, new String(this.guessState), this.gameover);
     }
 
 
@@ -65,6 +68,7 @@ public class HangmanGame {
 
         }
         catch(Exception e){
+            //system.err
             System.err.println("File not found!");
             return null;
         }
@@ -72,8 +76,13 @@ public class HangmanGame {
 
     }
     public GameState guess(String guess){
-        if(this.guessesLeft == 0){
+//        if(this.guessesLeft == 0){
+//            return getGameState();
+//        }
+        if(this.gameover == true){
+
             return getGameState();
+
         }
         else{
             if(guess.length() == 1){
@@ -98,10 +107,16 @@ public class HangmanGame {
             }
         }
         if(this.word.equals(new String(guessState))) {
-            this.guessesLeft = -1;
+            //this.guessesLeft = -1;
+            this.gameover = true;
+            this.score++;
         }
         else if(!correctletter){
             this.guessesLeft--;
+            if(this.guessesLeft == 0){
+                this.gameover = true;
+                this.score--;
+            }
         }
 
 
@@ -109,10 +124,17 @@ public class HangmanGame {
     private void guessWord(String word){
         if(this.word.equals(word)){
             this.guessState = this.word.toCharArray();
-            this.guessesLeft = -1;
+            //this.guessesLeft = -1;
+            this.gameover = true;
+            this.score++;
         }
         else {
             this.guessesLeft--;
+            if(this.guessesLeft == 0){
+                this.gameover = true;
+                this.score--;
+
+            }
         }
 
 
